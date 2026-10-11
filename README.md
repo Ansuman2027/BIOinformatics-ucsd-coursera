@@ -366,4 +366,23 @@ Algorithm Mechanism:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+15 distance between pattern and strings
+
+This function computes the cumulative distance $d(\text{Pattern}, \text{DNA})$ between a target $k$-mer (`pattern`) and a collection of DNA sequences (`dna`).
+
+Biological Context:
+In regulatory motif finding, a putative transcription factor binding site rarely matches regulatory regions across all co-regulated genes identically. To measure how well a candidate motif consensus represents an entire set of upstream sequences, researchers evaluate its cumulative divergence. By identifying the closest matching site in each sequence and summing those minimal differences, this metric quantifies the overall evolutionary distance between a candidate pattern and the entire set of promoter regions.
+
+Algorithm Mechanism:
+- Sequence-by-Sequence Scan: Iterates across each sequence `text` in the `dna` list.
+- Sliding Window Minimum: For a given sequence, slides a window of length $k = \text{len}(\text{pattern})$ across all starting positions from index $0$ to $\vert{}text\vert{} - k$, computing the Hamming distance between `pattern` and each window `text[i : i + k]`.
+- Distance Minimization: Determines the minimum Hamming distance $\min d(\text{Pattern}, \text{k-mer})$ found within that sequence.
+- Cumulative Aggregation: Sums these minimal sequence distances across all strings in the collection:
+  $$d(\text{Pattern}, \text{DNA}) = \sum_{\text{text} \in \text{DNA}} \min_{k\text{-mer} \in \text{text}} \text{HammingDistance}(\text{Pattern}, k\text{-mer})$$
+- Complexity:
+  - Time Complexity: $O(t \cdot (\vert{}text\vert{} - k + 1) \cdot k)$, where $t$ is the number of sequences in `dna` and $\vert{}text\vert{}$ is the average sequence length.
+  - Space Complexity: $O(1)$ auxiliary space beyond input storage.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
