@@ -465,3 +465,21 @@ Algorithm Mechanism:
   - Space Complexity: $O(1)$ auxiliary space beyond input slices, streaming comparisons directly.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+20 frequent words with mismatches utility
+
+This algorithm identifies the most frequent $k$-mers within a genomic sequence (`text`), allowing each occurrence to vary by up to $d$ mismatches (Hamming distance $\le d$).
+
+Biological Context:
+Key regulatory signals—such as the DnaA boxes that trigger replication initiation at *oriC* or transcription factor binding sites—rarely appear as strictly identical repeats across genomes. Instead, biological systems utilize degenerate sequence motifs where evolutionary substitutions are tolerated. Finding the most frequent $k$-mers with mismatches discovers these master consensus motifs even when the exact consensus sequence itself never appears identically in the raw sequence.
+
+Algorithm Mechanism:
+- Neighborhood Expansion (`neighbors`): For every windowed substring in `text`, recursively generates its $d$-neighborhood—the complete set of $k$-mers differing by at most $d$ substitutions.
+- Frequency Mapping (`defaultdict`): Slides a window of length $k$ across `text` from index $0$ to $\vert{}text\vert{} - k$. For every window extracted, each pattern in its $d$-neighborhood receives a $+1$ tally in the frequency table.
+- Peak Frequency Extraction: Evaluates the maximum occurrence count across all tracked degenerate patterns (`max_count = max(counts.values())`) and returns all $k$-mers reaching this peak score.
+- Complexity:
+  - Time Complexity: $O\left((\vert{}text\vert{} - k + 1) \cdot \sum_{i=0}^d \binom{k}{i} 3^i \cdot k\right)$, generating and updating counts for all neighbors of every sliding window.
+  - Space Complexity: $O(U \cdot k)$, where $U \le 4^k$ is the number of distinct candidate $k$-mers maintained in the frequency map.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
