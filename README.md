@@ -427,3 +427,22 @@ Algorithm Mechanism:
   - Space Complexity: $O(1)$ auxiliary memory, generating paired comparisons via iterator streaming without additional allocations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+18 approx pattern matching utility
+
+This utility function locates all starting positions where a target $k$-mer (`pattern`) appears as a substring within a genomic sequence (`text`) with at most $d$ mismatches (Hamming distance $\le d$).
+
+Biological Context:
+In natural biological systems, regulatory motifs such as transcription factor binding sites and DnaA replication boxes rarely stay completely invariant over evolutionary time. Point mutations introduce substitutions that allow proteins to continue binding even when several nucleotides diverge. Finding all starting positions with an allowed mismatch tolerance enables researchers to locate degenerated or mutated motifs across complete bacterial genomes that would otherwise be missed by exact pattern matching.
+
+Algorithm Mechanism:
+- Sliding Window Traversal: Iterates across `text` using a sliding window of length $k = \text{len}(\text{pattern})$ across all starting positions from index $0$ to $\vert{}text\vert{} - k$.
+- Element-Wise Mismatch Calculation: For each candidate slice `text[i : i + k]`, computes the Hamming distance against `pattern` using `sum(c1 != c2 for c1, c2 in zip(pattern, substring))`.
+- Coordinate Recording: Whenever the mismatch count satisfies $\le d$, the 0-based starting index $i$ is appended to the results list.
+- Complexity:
+  - Time Complexity: $O((\vert{}text\vert{} - k + 1) \cdot k)$ to evaluate each length-$k$ window against the pattern.
+  - Space Complexity: $O(M)$ auxiliary space, where $M$ is the number of starting indices recorded that satisfy the distance threshold.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
