@@ -187,6 +187,24 @@ Sliding Window: It slides a window of fixed length k=len(pattern) across text fr
 Overlapping Evaluation: Unlike native string counting methods (such as Python’s .count(), which skips matched segments), extracting slices text[i:i + k] step-by-step ensures that overlapping occurrences (e.g., finding GCG twice in GCGCG) are fully captured.
 
 Complexity: Runs in O((∣text∣−k+1)⋅k) time and requires O(1) additional space beyond substring slicing.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+00b frequent words
+
+This algorithm finds the most frequently occurring $k$-mers of length $k$ in a genomic sequence (`text`).
+
+Biological Context:
+A single $k$-mer appearing randomly in a DNA sequence is not necessarily biologically meaningful, but a $k$-mer repeated unusually often within a replication origin (oriC) strongly suggests a biological function—specifically, a binding site for replication initiation proteins (such as DnaA boxes in *E. coli*). Identifying these frequent words helps pinpoint the exact binding motifs that cells use to regulate DNA replication.
+
+Algorithm Mechanism:
+- Frequency Map (Hash Table): Uses a dictionary to tally occurrences of every windowed substring of length $k$ across `text` in a single pass.
+- Peak Frequency Extraction: Identifies `max_count` among all observed counts and collects all $k$-mers achieving this maximum value.
+- Complexity:
+  - Time Complexity: $O((\vert{}text\vert{} - k + 1) \cdot k)$ to extract and hash substrings of length $k$, plus $O(U)$ where $U \le 4^k$ is the number of unique $k$-mers to filter the maximal keys.
+  - Space Complexity: $O(U \cdot k)$ auxiliary space to store unique $k$-mers in the dictionary.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
