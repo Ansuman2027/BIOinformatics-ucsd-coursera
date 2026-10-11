@@ -208,3 +208,19 @@ Algorithm Mechanism:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+00c reverse complement
+
+This algorithm computes the reverse complement of a given DNA sequence (`pattern`).
+
+Biological Context:
+DNA is double-stranded, oriented antiparallel (5' to 3' on one strand runs opposite to 3' to 5' on the other), and governed by Watson-Crick base pairing (A pairs with T, C pairs with G). Regulatory motifs such as DnaA binding boxes can reside on either the forward or the reverse strand. Because replication enzymes interact with double-stranded DNA, identifying candidate motifs requires searching for both a $k$-mer and its reverse complement.
+
+Algorithm Mechanism:
+- Complement Mapping: Maps each nucleotide to its base-pairing partner using a lookup dictionary: A $\leftrightarrow$ T and C $\leftrightarrow$ G.
+- Directional Inversion: Iterates through the input string in reverse order (`reversed(pattern)`) to ensure the resulting sequence preserves the standard 5' to 3' reading direction.
+- Complexity:
+  - Time Complexity: $O(\vert{}pattern\vert{})$ to traverse and translate the sequence of length $\vert{}pattern\vert{}$.
+  - Space Complexity: $O(\vert{}pattern\vert{})$ auxiliary space to construct and return the resulting reverse complement string.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
