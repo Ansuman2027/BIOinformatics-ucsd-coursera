@@ -242,3 +242,22 @@ Algorithm Mechanism:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+00e find clumps
+
+This algorithm finds all distinct $k$-mers that form an $(L, t)$-clump—appearing at least $t$ times within any sliding window of length $L$ across a given `genome`.
+
+Biological Context:
+Replication origins (*oriC*) are not characterized by solitary binding sites; rather, they contain dense clusters (clumps) of replication initiation motifs (DnaA boxes) packed within a relatively short region (typically around 500 base pairs). Finding clumps of $k$-mers that recur at least $t$ times inside an $L$-length window provides an unbiased, genome-wide scan to locate candidate *oriC* regions without requiring prior knowledge of the specific binding sequence.
+
+Algorithm Mechanism:
+- Sliding Window on Genome: Maintains a window of length $L$ moving across the genome from index $0$ to $\vert{}genome\vert{} - L$.
+- Frequency Tracking (defaultdict): Computes the $k$-mer counts for the initial $L$-window. As the $L$-window slides right by 1 base at each step:
+  - Decrements the count of the `outgoing` $k$-mer leaving the left boundary (`genome[i - 1 : i - 1 + k]`).
+  - Increments the count of the `incoming` $k$-mer entering the right boundary (`genome[i + L - k : i + L]`).
+- Clump Collection: Whenever an incoming $k$-mer's tally reaches or exceeds threshold $t$, it is added to a `set` to guarantee distinct results without duplicate reporting.
+- Complexity:
+  - Time Complexity: $O(L \cdot k + (\vert{}genome\vert{} - L) \cdot k) = O(\vert{}genome\vert{} \cdot k)$, drastically outperforming naive $O(\vert{}genome\vert{} \cdot L)$ window re-evaluations.
+  - Space Complexity: $O(U \cdot k)$ auxiliary space, where $U \le 4^k$ is the number of distinct $k$-mers tracked in the frequency map.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
