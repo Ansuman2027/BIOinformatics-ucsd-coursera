@@ -8,7 +8,7 @@ It increments the skew count by +1 for G, decrements by −1 for C, and leaves i
 
 It dynamically tracks the lowest skew value seen so far and collects all 1-based indices that achieve this minimum.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -28,7 +28,7 @@ For each position, the boolean condition c1 != c2 evaluates to True (1) on a mis
 sum(...) aggregates all mismatches to yield the total distance
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 This function identifies all starting positions where a target k-mer pattern appears as a substring within a larger genomic text with at most d mismatches (Hamming distance ≤d).
@@ -46,7 +46,7 @@ If the count of mismatched bases is less than or equal to the threshold d, the 0
 It runs in O((∣text∣−k+1)⋅k) time complexity.
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -66,7 +66,7 @@ It operates in O((∣text∣−k+1)⋅k) time complexity and uses O(k) auxiliary
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -83,7 +83,7 @@ Frequency Array / Hash Map (defaultdict): Slides a window of length k across tex
 Peak Selection: Evaluates the highest count (max(counts.values())) and extracts all candidate patterns achieving that maximum score.
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -103,7 +103,7 @@ Peak Selection: Finds the maximum frequency value stored in the defaultdict and 
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -130,7 +130,7 @@ If text has already exhausted all d allowed mismatches, the first position must 
 Deduplication: Uses a set() during construction to ensure each variant is unique before returning the final list.
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -148,7 +148,7 @@ Pruning & Filtering: Using Python's all(), candidates that fail to appear in eve
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 This algorithm computes the minimum number of coins needed to make a specific amount of money given a set of coin denominations.
@@ -171,7 +171,7 @@ min
 Complexity: Runs in O(money⋅∣coins∣) time and consumes O(money) space.
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 00 pattern count 
