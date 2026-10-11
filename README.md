@@ -261,3 +261,25 @@ Algorithm Mechanism:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+10 motif enumeration
+
+This algorithm identifies all $(k, d)$-motifs—$k$-mers that appear in every sequence of a given collection of DNA strings with at most $d$ mismatches.
+
+Biological Context:
+Regulatory motifs (such as transcription factor binding sites) rarely appear as exact matches across different genes or organisms; evolutionary mutations introduce point mutations (substitutions). Consequently, finding conserved regulatory signals across a collection of upstream promoter regions requires searching for degenerate patterns that tolerate up to $d$ mismatches across every related sequence.
+
+Algorithm Mechanism:
+- Candidate Generation via $d$-Neighborhoods: Extracts every $k$-mer from the first DNA sequence and computes its $d$-neighborhood (all strings of length $k$ with Hamming distance $\le d$) using recursive neighborhood expansion. Every such neighbor serves as a candidate motif.
+- Universal Sequence Validation: For each unique candidate, the algorithm checks whether an approximate match (Hamming distance $\le d$) exists within all remaining sequences in the dataset.
+- Pruning and Filtering: Retains only candidates that appear with at most $d$ mismatches in every single sequence, returning the lexicographically sorted set of valid motifs.
+- Complexity:
+  - Candidate Generation: Generates at most $(|D_1| - k + 1) \cdot \binom{k}{d} 3^d$ candidates from the first sequence $D_1$.
+  - Verification: Evaluating each candidate across $t$ sequences of length $N$ takes $O(t \cdot (N - k + 1) \cdot k)$ time.
+  - Overall Time Complexity: $O\left(N \cdot \binom{k}{d} 3^d + |C| \cdot t \cdot N \cdot k\right)$, where $|C|$ is the number of unique candidates and $t$ is the number of sequences.
+  - Space Complexity: $O(|C| \cdot k)$ auxiliary space to store candidate motifs and neighborhoods.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
