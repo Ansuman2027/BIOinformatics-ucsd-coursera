@@ -303,3 +303,22 @@ Algorithm Mechanism:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+12 profile most probable kmer
+
+This algorithm identifies the Profile-most probable $k$-mer within a genomic sequence (`text`) according to a given nucleotide profile probability matrix (`profile`).
+
+Biological Context:
+Regulatory motifs do not consist of identical sequences; instead, different nucleotide positions possess varying degrees of conservation. A profile matrix represents this variation quantitatively as position-specific probabilities $P(\text{nucleotide at position } j)$. When searching a newly sequenced genome or promoter region for a transcription factor binding site modeled by a known profile, evaluating the joint probability of each candidate $k$-mer allows biologists to locate the binding site with the strongest affinity.
+
+Algorithm Mechanism:
+- Sliding Window Evaluation: Slides a window of length $k$ across `text` evaluating every $k$-mer candidate from index $0$ to $\vert{}text\vert{} - k$.
+- Likelihood Calculation: For each $k$-mer, computes its probability under the profile matrix assuming independent positions by multiplying the corresponding nucleotide frequencies:
+  $$P(\text{kmer} \mid \text{Profile}) = \prod_{j=0}^{k-1} \text{Profile}[\text{kmer}[j]][j]$$
+- Maximum Likelihood Selection: Tracks the maximum probability observed (`max_prob`) and updates `most_probable_kmer` whenever a strictly greater probability is found. Ties default to the first occurrence encountered.
+- Complexity:
+  - Time Complexity: $O((\vert{}text\vert{} - k + 1) \cdot k)$ to evaluate each length-$k$ window with $k$ multiplication lookups.
+  - Space Complexity: $O(k)$ auxiliary space to hold candidate $k$-mers.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
