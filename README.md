@@ -322,3 +322,26 @@ Algorithm Mechanism:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+13 greedy motif search
+
+This algorithm discovers a collection of regulatory motifs across a set of DNA sequences by iteratively making locally optimal choices based on profile matrices.
+
+Biological Context:
+Exhaustive search methods like Median String become computationally intractable as $k$ grows. In biological systems, transcription factor binding sites across co-regulated genes share a conserved profile. Greedy Motif Search trades an exhaustive guarantee for speed by assuming that selecting the correct motif in the first sequence establishes a representative profile strong enough to guide the detection of corresponding binding sites in the remaining promoter sequences.
+
+Algorithm Mechanism:
+- Initial Baseline: Initializes `best_motifs` with the arbitrary first $k$-mer of each sequence and computes its baseline mismatch score.
+- Outer Loop: Iterates over every possible $k$-mer in the first DNA sequence (`dna[0]`), treating it as the seed candidate motif.
+- Greedy Expansion: For each subsequent sequence $j$ (from $1$ to $t - 1$):
+  - Builds a frequency profile matrix (`make_profile`) from all motifs selected so far.
+  - Identifies the Profile-most probable $k$-mer (`profile_most_probable_kmer`) in sequence `dna[j]` under that profile and appends it to the motif set.
+- Consensus Scoring: Evaluates the total mismatch count of the completed motif matrix using `score_motifs` ($Score(\text{Motifs}) = \sum (t - \text{max\_count}_j)$). If the current candidate collection has a strictly lower score than `best_score`, it updates `best_motifs`.
+- Complexity:
+  - Iterations: Evaluates $(\vert{}dna[0]\vert{} - k + 1)$ candidate seeds from the first string.
+  - Expansion Cost: Each seed requires $t$ steps of profile generation and scanning an $N$-length sequence ($O(t \cdot N \cdot k)$).
+  - Overall Time Complexity: $O(\vert{}dna[0]\vert{} \cdot t \cdot N \cdot k)$, drastically faster than brute-force $O(4^k)$ search.
+  - Space Complexity: $O(t \cdot k)$ auxiliary space to store candidate motifs and the profile matrix.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
