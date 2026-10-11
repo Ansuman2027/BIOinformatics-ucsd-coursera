@@ -75,4 +75,26 @@ neighbors(pattern, d): Recursively builds the complete d-neighborhood—every po
 Bidirectional Neighborhood Tally: Slides a length-k window across text. For every valid neighbor of that window, it increments the count of both the neighbor and its reverse_complement(neighbor).
 
 Peak Selection: Finds the maximum frequency value stored in the defaultdict and returns all k-mers matching that highest aggregate score.
+--------------------------------------------------------------------------------------------------------
+This algorithm generates the complete set of all k-mers whose Hamming distance from a target sequence s does not exceed a specified threshold d.
+
+Biological Context: In motif finding, biological regulatory sites (such as DnaA boxes or transcription factor binding targets) are not strictly conserved and tolerate point substitutions. Rather than testing every theoretical sequence across the genome, generating the d-neighborhood constructs the exact space of all biologically acceptable mutational variants around an observed sequence motif.
+
+Algorithm Mechanism:
+
+Recursive Suffix Decomposition: The problem is broken down recursively by computing the neighborhood of the suffix s[1:].
+
+Base Cases:
+
+If d=0, the only string within distance 0 is the sequence itself ([s]).
+
+If the string has length 1, any single nucleotide substitution is valid, returning all four bases (['A', 'C', 'G', 'T']).
+
+Distance Budgeting:
+
+If the suffix neighbor text has already used fewer than d mismatches relative to s[1:], the first position can be replaced with any nucleotide (A, C, G, or T).
+
+If text has already exhausted all d allowed mismatches, the first position must strictly match the original first base s[0].
+
+Deduplication: Uses a set() during construction to ensure each variant is unique before returning the final list.
 
