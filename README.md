@@ -483,3 +483,23 @@ Algorithm Mechanism:
   - Space Complexity: $O(U \cdot k)$, where $U \le 4^k$ is the number of distinct candidate $k$-mers maintained in the frequency map.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+21 frequent words mismatches reverse complements utility
+
+This algorithm identifies the most frequent $k$-mers in a genomic sequence (`text`) allowing up to $d$ mismatches and simultaneously aggregating occurrences across both DNA strands (forward sequence and its reverse complement).
+
+Biological Context:
+Because DNA is double-stranded and antiparallel, regulatory proteins such as DnaA binding enzymes recognize binding motifs regardless of whether they appear on the forward strand or reverse strand. Furthermore, real regulatory signals accumulate evolutionary point mutations. Combining approximate matching with reverse complement counting provides the most accurate and biologically realistic model for identifying replication origins (*oriC*) and transcription factor binding sites across entire bacterial genomes.
+
+Algorithm Mechanism:
+- Neighborhood Expansion (`neighbors`): For every sliding window across `text`, recursively computes its $d$-neighborhood—the set of all length-$k$ strings differing by at most $d$ point mutations.
+- Dual-Strand Frequency Aggregation (`defaultdict`): Slides a window of length $k$ across `text` from index $0$ to $\vert{}text\vert{} - k$. For every neighbor generated from the current window:
+  - Increments the count for the neighbor itself: `counts[neighbor] += 1`.
+  - Simultaneously increments the count for its reverse complement: `counts[reverse_complement(neighbor)] += 1`.
+- Peak Score Extraction: Finds the maximum tally achieved among all observed candidate motifs (`max_count`) and outputs all $k$-mers that reach this peak value.
+- Complexity:
+  - Time Complexity: $O\left((\vert{}text\vert{} - k + 1) \cdot \sum_{i=0}^d \binom{k}{i} 3^i \cdot k\right)$, generating the full $d$-neighborhood and evaluating both strands for every window position.
+  - Space Complexity: $O(U \cdot k)$, where $U \le 4^k$ represents the unique candidate $k$-mers and reverse complements stored in the frequency hash map.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
