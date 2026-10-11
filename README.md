@@ -49,4 +49,16 @@ For every k-mer window, it computes the Hamming distance relative to pattern usi
 If the total number of mismatched bases is ≤d, an integer counter increments by 1.
 
 It operates in O((∣text∣−k+1)⋅k) time complexity and uses O(k) auxiliary space for the slice window.
+---------------------------------------------------------------------------------------------------------
+This pipeline discovers the most overrepresented k-mers (motifs) within a genomic sequence text, allowing each occurrence to vary by up to d mismatches.
+
+Biological Context: Key regulatory signals—such as the DnaA boxes that trigger bacterial replication initiation—are rarely identical repeats. Instead, a master consensus motif operates across a family of degenerate variants scattered through the origin of replication. Finding the most frequent k-mers with mismatches pinpoints these biological consensus motifs even when the exact canonical sequence appears only rarely or not at all in the raw genome.
+
+Algorithm Mechanism:
+
+neighbors(pattern, d): A recursive subroutine generating the d-neighborhood—the set of all valid k-mers whose Hamming distance from the input pattern is at most d.
+
+Frequency Array / Hash Map (defaultdict): Slides a window of length k across text. For every observed window, it expands its entire d-neighborhood and increments a shared tally for each neighbor.
+
+Peak Selection: Evaluates the highest count (max(counts.values())) and extracts all candidate patterns achieving that maximum score.
 
