@@ -128,4 +128,20 @@ min
 ​
  (min_num_coins[m],min_num_coins[m−coin]+1)
 Complexity: Runs in O(money⋅∣coins∣) time and consumes O(money) space.
+-----------------------------------------------------------------------------------------------------------------
+00 pattern count 
+This algorithm computes the total number of times a specific k-mer (pattern) appears as a substring within a genomic sequence (text), accounting for overlapping occurrences.
+
+Biological Context:
+In computational genomics, identifying the origin of replication (oriC) begins with finding short, repeated DNA sequences (DnaA boxes) where initiator proteins bind to trigger replication. Because bacterial DNA replication machinery often targets repeated binding motifs clustered tightly together, accurately counting how frequently specific k-mers appear in a genome is the foundational step toward locating replication origins and identifying frequent regulatory words.
+
+Algorithm Mechanism:
+
+Sliding Window: It slides a window of fixed length k=len(pattern) across text from index 0 to ∣text∣−k.
+
+Overlapping Evaluation: Unlike native string counting methods (such as Python’s .count(), which skips matched segments), extracting slices text[i:i + k] step-by-step ensures that overlapping occurrences (e.g., finding GCG twice in GCGCG) are fully captured.
+
+Complexity: Runs in O((∣text∣−k+1)⋅k) time and requires O(1) additional space beyond substring slicing.
+------------------------------------------------------------------------------------------------------------------
+
 
