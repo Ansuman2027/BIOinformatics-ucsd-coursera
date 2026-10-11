@@ -224,3 +224,21 @@ Algorithm Mechanism:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+00d pattern matching
+
+This algorithm locates all starting positions where a target sequence (`pattern`) occurs within a larger sequence (`genome`).
+
+Biological Context:
+Finding putative replication origins often requires locating every exact occurrence of a known regulatory motif (such as a 9-mer DnaA box) across an entire bacterial chromosome (e.g., *Vibrio cholerae*). By mapping the exact starting coordinates of these motifs, researchers can identify high-density clusters of binding sites, which typically mark the precise genomic location of *oriC*.
+
+Algorithm Mechanism:
+- Linear Scan (Exact Substring Matching): Slides a window of length $k = \text{len}(\text{pattern})$ across `genome` starting at index $0$ up to $\vert{}genome\vert{} - k$.
+- Index Collection: Compares each genomic slice `genome[i:i + k]` against `pattern`. Whenever an exact match occurs, the 0-based starting index $i$ is appended to the results list.
+- Overlapping Detection: Increments the index by $1$ after every comparison, ensuring that tandem or overlapping instances of the motif are detected.
+- Complexity:
+  - Time Complexity: $O((\vert{}genome\vert{} - k + 1) \cdot k)$ to extract and compare substrings across the genome.
+  - Space Complexity: $O(M)$ auxiliary space, where $M$ is the number of matching indices recorded.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
