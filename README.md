@@ -446,3 +446,22 @@ Algorithm Mechanism:
   - Space Complexity: $O(M)$ auxiliary space, where $M$ is the number of starting indices recorded that satisfy the distance threshold.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+19 approx pattern count utility
+
+This utility function computes the total frequency with which a target $k$-mer (`pattern`) appears within a genomic sequence (`text`) allowing up to $d$ mismatches (Hamming distance $\le d$).
+
+Biological Context:
+In computational genomics, determining the density of degenerate motifs is critical for identifying biological signals such as replication origins (*oriC*) and regulatory promoters. Functional protein binding sites (such as DnaA boxes) frequently cluster together in high densities with slight point mutations; counting occurrences with tolerance for mismatches quantifies how strongly a specific motif family is enriched in a genomic region without requiring exact sequence conservation.
+
+Algorithm Mechanism:
+- Sliding Window Traversal: Shifts a window of fixed length $k = \text{len}(\text{pattern})$ across `text`, evaluating every candidate substring starting from index $0$ to $\vert{}text\vert{} - k$.
+- Mismatch Evaluation: For each window `text[i : i + k]`, computes the Hamming distance relative to `pattern` via character-by-character comparison using `zip(pattern, window)`.
+- Frequency Accumulation: Increments an integer counter by $1$ whenever the total number of mismatched base positions is $\le d$.
+- Complexity:
+  - Time Complexity: $O((\vert{}text\vert{} - k + 1) \cdot k)$ to evaluate each length-$k$ window across the sequence.
+  - Space Complexity: $O(1)$ auxiliary space beyond input slices, streaming comparisons directly.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
