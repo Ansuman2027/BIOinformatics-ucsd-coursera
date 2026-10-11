@@ -61,4 +61,18 @@ neighbors(pattern, d): A recursive subroutine generating the d-neighborhood—th
 Frequency Array / Hash Map (defaultdict): Slides a window of length k across text. For every observed window, it expands its entire d-neighborhood and increments a shared tally for each neighbor.
 
 Peak Selection: Evaluates the highest count (max(counts.values())) and extracts all candidate patterns achieving that maximum score.
+---------------------------------------------------------------------------------------------------------
+This algorithm discovers the most abundant k-mer patterns in a genomic sequence by tallying occurrences that allow up to d mismatches and simultaneously accounting for both the forward and reverse complementary strands.
+
+Biological Context: DNA is double-stranded, and replication or transcription factors (such as the DnaA initiator protein) bind double-stranded DNA. Because these proteins can recognize binding motifs regardless of which strand carries the canonical sequence (5' to 3' on the forward strand or 5' to 3' on the reverse-complement strand), counting matches on both strands combined is the gold standard approach for identifying true functional motifs like DnaA boxes in bacterial replication origins (oriC).
+
+Algorithm Mechanism:
+
+reverse_complement(pattern): Inverts the nucleotide sequence direction and maps each base to its Watson-Crick complement (A ↔ T, C ↔ G).
+
+neighbors(pattern, d): Recursively builds the complete d-neighborhood—every possible k-mer within a Hamming distance ≤d from the target window.
+
+Bidirectional Neighborhood Tally: Slides a length-k window across text. For every valid neighbor of that window, it increments the count of both the neighbor and its reverse_complement(neighbor).
+
+Peak Selection: Finds the maximum frequency value stored in the defaultdict and returns all k-mers matching that highest aggregate score.
 
