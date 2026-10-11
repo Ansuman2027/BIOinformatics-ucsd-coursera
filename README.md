@@ -503,3 +503,22 @@ Algorithm Mechanism:
   - Space Complexity: $O(U \cdot k)$, where $U \le 4^k$ represents the unique candidate $k$-mers and reverse complements stored in the frequency hash map.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+22 change problem utility
+
+This algorithm determines the minimum number of coins needed to make change for a given monetary amount (`money`) using a provided list of coin denominations (`coins`).
+
+Biological Context:
+While formulated as a classic coin change problem, this algorithm introduces the fundamental dynamic programming paradigm required for sequence alignment in computational genomics. Biological sequence alignments (Needleman-Wunsch global alignment, Smith-Waterman local alignment, and Manhattan Tourist models) cannot be solved reliably using greedy heuristics because local optimal choices frequently lead to globally suboptimal alignments. Solving the change problem demonstrates how decomposing a complex problem into overlapping subproblems guarantees an optimal global solution.
+
+Algorithm Mechanism:
+- Dynamic Programming Array (Bottom-Up): Initializes a table `min_num_coins` of size `money + 1` where base case index `0` is set to $0$ coins and all other amounts are initialized to infinity ($\infty$).
+- Subproblem Recurrence: Iterates iteratively through every integer value $m$ from $1$ up to `money`. For each coin denomination $c \in \text{coins}$ where $m \ge c$:
+  $$\text{min\_num\_coins}[m] = \min(\text{min\_num\_coins}[m], \text{min\_num\_coins}[m - c] + 1)$$
+- Global Optimization: Guarantees that every intermediate target amount $m$ is resolved to its minimal coin count prior to being used to compute larger sums.
+- Complexity:
+  - Time Complexity: $O(\text{money} \cdot \vert{}\text{coins}\vert{})$, exploring every denomination for each integer sub-amount.
+  - Space Complexity: $O(\text{money})$ auxiliary memory to maintain the dynamic programming table.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
