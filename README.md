@@ -35,5 +35,18 @@ For each extracted k-mer window, it computes the Hamming distance between the wi
 If the count of mismatched bases is less than or equal to the threshold d, the 0-based starting index i is appended to the results.
 
 It runs in O((∣text∣−k+1)⋅k) time complexity.
+------------------------------------------------------------------------------------------------------
+This function computes the total frequency with which a target k-mer pattern occurs within a larger genomic text with up to d allowed mismatches (Hamming distance ≤d).
 
+Biological Context: In computational genomics, determining the density of degenerate motifs is critical for identifying biological signals like replication origins (oriC) and regulatory promoters. Functional binding sites (such as DnaA boxes) frequently cluster together in high densities with slight point mutations; counting occurrences with tolerance for mismatches quantifies how strongly a specific motif family is enriched in a genomic region.
+
+Algorithm Mechanism:
+
+It shifts a fixed-size window of length k=len(pattern) across text, inspecting every starting index from 0 to ∣text∣−k.
+
+For every k-mer window, it computes the Hamming distance relative to pattern using character-by-character comparison via zip().
+
+If the total number of mismatched bases is ≤d, an integer counter increments by 1.
+
+It operates in O((∣text∣−k+1)⋅k) time complexity and uses O(k) auxiliary space for the slice window.
 
