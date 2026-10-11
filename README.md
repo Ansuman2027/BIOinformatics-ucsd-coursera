@@ -21,6 +21,19 @@ It uses Python's zip() to align and iterate over both strings in parallel, chara
 For each position, the boolean condition c1 != c2 evaluates to True (1) on a mismatch and False (0) on a match.
 
 sum(...) aggregates all mismatches to yield the total distance.
+--------------------------------------------------------------------------------------------------------
+This function identifies all starting positions where a target k-mer pattern appears as a substring within a larger genomic text with at most d mismatches (Hamming distance ≤d).
 
+Biological Context: In nature, regulatory regions such as DnaA boxes or transcription factor binding sites are rarely conserved perfectly. Over evolutionary time, mutations occur, meaning a regulatory protein can still recognize and bind to sequences that vary by a few nucleotides. Approximate pattern matching allows computational biologists to locate degenerated or mutated motifs across an entire genome rather than missing them with exact string matching.
+
+Algorithm Mechanism:
+
+It employs a sliding window of length k=len(pattern) across text, evaluating every possible starting position from index 0 to ∣text∣−k.
+
+For each extracted k-mer window, it computes the Hamming distance between the window and pattern by comparing corresponding characters with zip().
+
+If the count of mismatched bases is less than or equal to the threshold d, the 0-based starting index i is appended to the results.
+
+It runs in O((∣text∣−k+1)⋅k) time complexity.
 
 
