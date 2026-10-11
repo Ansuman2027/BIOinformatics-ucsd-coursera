@@ -408,5 +408,22 @@ Algorithm Mechanism:
   - Time Complexity: $O\left(k \cdot \sum_{i=0}^d \binom{k}{i} 3^i\right)$ to recursively assemble and prepend nucleotides to each valid variant.
   - Space Complexity: $O\left(k \cdot \sum_{i=0}^d \binom{k}{i} 3^i\right)$ auxiliary memory to store intermediate and final neighbor sets.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+17 hamming distance utility
+
+This utility function computes the Hamming distance between two DNA sequences of equal length, counting the exact number of mismatched nucleotide positions between them.
+
+Biological Context:
+In genomic analysis, sequence divergence across homologs, orthologs, and regulatory motifs arises predominantly through point mutations (single-nucleotide substitutions). Measuring the Hamming distance provides the core quantitative foundation for assessing how closely a mutated sequence resembles an original biological signal, underpinning nearly all approximate pattern matching, clustering, and consensus motif discovery algorithms.
+
+Algorithm Mechanism:
+- Parallel Character Alignment: Utilizes Python's built-in `zip(p, q)` to pair and traverse corresponding nucleotides across both strings simultaneously in a single pass.
+- Mismatch Counting: Evaluates the inequality `c1 != c2` for each aligned pair, generating boolean indicators (`True` for mismatches, `False` for matches).
+- Aggregation: Sums the boolean evaluation stream directly using `sum(...)` to return the total mismatch count.
+- Complexity:
+  - Time Complexity: $O(n)$, where $n = \text{len}(p) = \text{len}(q)$, performing a single linear pass across the strings.
+  - Space Complexity: $O(1)$ auxiliary memory, generating paired comparisons via iterator streaming without additional allocations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
