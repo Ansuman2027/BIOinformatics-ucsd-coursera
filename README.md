@@ -97,4 +97,16 @@ If the suffix neighbor text has already used fewer than d mismatches relative to
 If text has already exhausted all d allowed mismatches, the first position must strictly match the original first base s[0].
 
 Deduplication: Uses a set() during construction to ensure each variant is unique before returning the final list.
+------------------------------------------------------------------------------------------------------
+This algorithm finds all (k,d)-motifs shared across a collection of DNA sequences—identifying every k-mer that appears in every sequence in dna with at most d mismatches.
+
+Biological Context: Regulatory sequences like transcription factor binding sites (TFBS) control gene expression across clusters of co-regulated genes. Because these binding sites are planted across upstream promoter regions of different genes, they are conserved yet degenerate (subject to point mutations). Motif enumeration solves the challenge of discovering these shared regulatory patterns across a set of related genomic sequences without prior knowledge of what the consensus motif looks like.
+
+Algorithm Mechanism:
+
+Candidate Generation: Any valid motif shared by all sequences must appear in the first sequence dna[0] with at most d mismatches. The algorithm extracts every k-mer from dna[0], builds its d-neighborhood via neighbors(), and collects these variants into a set of unique candidates.
+
+Cross-Sequence Verification: For each candidate k-mer, has_approximate_match() checks whether an instance with ≤d mismatches exists within each remaining DNA sequence.
+
+Pruning & Filtering: Using Python's all(), candidates that fail to appear in even one sequence are immediately discarded. Only those confirmed in every strand of dna are retained and returned.
 
