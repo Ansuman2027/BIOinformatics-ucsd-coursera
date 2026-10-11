@@ -282,4 +282,24 @@ Algorithm Mechanism:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+11 median string
+
+This algorithm finds a $k$-mer (`pattern`) that minimizes the total distance $d(\text{Pattern}, \text{DNA})$ across all sequences in a given DNA collection.
+
+Biological Context:
+When searching for regulatory motifs shared among co-regulated genes, transcription factor binding sites are rarely identical across promoters. Instead of demanding an exact motif match or a rigid threshold of mismatches, the median string approach searches for a consensus sequence that represents the evolutionary center—minimizing the total number of point mutations required to derive a binding site in every promoter sequence.
+
+Algorithm Mechanism:
+- Exhaustive Motif Search: Uses `itertools.product('ACGT', repeat=k)` to systematically evaluate all $4^k$ possible nucleotide combinations of length $k$.
+- Sequence Distance Calculation: For each candidate $k$-mer, computes its distance to a single sequence by finding the minimum Hamming distance across all sliding windows of length $k$ (`distance_pattern_to_text`).
+- Total Consensus Distance: Aggregates the minimum distances across all sequences in `dna` via $d(\text{Pattern}, \text{DNA}) = \sum d(\text{Pattern}, \text{seq})$.
+- Median Selection: Tracks the minimal total distance and records the optimal $k$-mer that minimizes this sum.
+- Complexity:
+  - Search Space: Evaluates all $4^k$ possible candidates.
+  - Evaluation Cost: Testing a single candidate against $t$ sequences of length $N$ takes $O(t \cdot (N - k + 1) \cdot k)$ operations.
+  - Overall Time Complexity: $O(4^k \cdot t \cdot N \cdot k)$, where $t$ is the number of sequences and $N$ is their average length.
+  - Space Complexity: $O(k)$ auxiliary space to generate and maintain candidate strings.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
