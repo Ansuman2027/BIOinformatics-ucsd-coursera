@@ -109,4 +109,23 @@ Candidate Generation: Any valid motif shared by all sequences must appear in the
 Cross-Sequence Verification: For each candidate k-mer, has_approximate_match() checks whether an instance with ≤d mismatches exists within each remaining DNA sequence.
 
 Pruning & Filtering: Using Python's all(), candidates that fail to appear in even one sequence are immediately discarded. Only those confirmed in every strand of dna are retained and returned.
+------------------------------------------------------------------------------------------------------
+This algorithm computes the minimum number of coins needed to make a specific amount of money given a set of coin denominations.
+
+Context & Motivation: A standard greedy approach (always picking the largest available coin) fails for arbitrary coin systems (e.g., making change for 40 with coins {25,20,10,5,1} gives 25+10+5 [3 coins] via greedy, but 20+20 [2 coins] is optimal). In bioinformatics, this problem serves as the introductory conceptual gateway to dynamic programming before tackling sequence alignment, string edit distances, and the Manhattan Tourist Problem.
+
+Algorithm Mechanism:
+
+Dynamic Programming (Bottom-Up Tabulation): It constructs an array min_num_coins of size money+1, where the entry at index m stores the minimum coins required to make change for amount m.
+
+Base Case: min_num_coins[0] = 0 (zero coins needed to make change for 0). All other positions start at ∞.
+
+Recurrence Relation: For every intermediate amount m from 1 to money and for each eligible coin (m≥coin):
+
+min_num_coins[m]= 
+coin
+min
+​
+ (min_num_coins[m],min_num_coins[m−coin]+1)
+Complexity: Runs in O(money⋅∣coins∣) time and consumes O(money) space.
 
