@@ -345,3 +345,25 @@ Algorithm Mechanism:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+14 greedy motif search with pseudocounts
+
+This algorithm enhances Greedy Motif Search by applying pseudocounts (Laplace's Rule of Succession) to eliminate zero-probability entries in motif profile matrices.
+
+Biological Context:
+In standard profile construction, if a particular nucleotide has not yet been observed at position $j$ among the early selected motifs, its estimated probability becomes zero. Because a candidate $k$-mer’s overall likelihood is computed by multiplying probabilities across all positions, a single zero probability forces the entire product to zero ($P = 0$). Biologically, an unobserved base does not mean that substitution is impossible—it simply reflects limited sample size. Applying pseudocounts prevents a single unseen nucleotide from unfairly penalizing otherwise high-affinity binding sites.
+
+Algorithm Mechanism:
+- Laplace’s Rule of Succession: Initializes every nucleotide tally to $1.0$ across all positions rather than starting from $0$.
+- Adjusted Normalization: Divides each nucleotide count by $(t + 4)$ instead of $t$, accounting for the extra pseudo-observation added to each of the four DNA bases (A, C, G, T).
+- Iterative Motif Discovery:
+  - Iterates through all possible seed $k$-mers in the first sequence `dna[0]`.
+  - Stepwise constructs the pseudocount profile matrix across subsequent sequences and selects the most probable $k$-mer (`profile_most_probable_kmer`).
+- Score Optimization: Retains the set of motifs that minimizes total mismatch consensus score via `score_motifs`.
+- Complexity:
+  - Time Complexity: $O(\vert{}dna[0]\vert{} \cdot t \cdot N \cdot k)$, matching the standard greedy motif search runtime while avoiding premature zero-probability traps.
+  - Space Complexity: $O(t \cdot k)$ auxiliary space to maintain motif lists and profile matrices.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
