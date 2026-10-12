@@ -522,3 +522,20 @@ Algorithm Mechanism:
   - Space Complexity: $O(\text{money})$ auxiliary memory to maintain the dynamic programming table.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+23 randomized motif search utility
+
+This algorithm implements a Monte Carlo, randomized expectation-maximization approach to solve the Motif Finding Problem across a set of sequences by iteratively updating a motif collection and its corresponding profile matrix with pseudocounts.
+
+Biological Context:
+In bacterial and eukaryotic genomes, transcription factors bind short, degenerate regulatory sequences (motifs) upstream of coregulated genes. Because biological motifs exhibit evolutionary variation and point mutations, exact pattern matching fails. Deterministic exhaustive methods are computationally intractable across long sequences, while greedy approaches frequently become trapped in local optima. Randomized Motif Search leverages iterative stochastic sampling: by introducing random starting positions combined with Laplace pseudocounts, it traverses the high-dimensional search space efficiently to converge on subtle, conserved regulatory signals without assigning zero probability to unobserved nucleotides.
+
+Algorithm Mechanism:
+- Random Initialization: In each independent trial (`single_randomized_motif_search`), selects a random $k$-mer uniformly across each of the $t$ genomic sequences as the initial candidate motif collection.
+- Profile Matrix with Laplace Pseudocounts: Constructs a position weight matrix (profile) from the current motifs using Laplace’s Rule of Succession (adding $+1$ to all nucleotide counts and normalizing by $t + 4$) to prevent zero-probability bottlenecks.
+- Iterative Refinement: Extracts the Profile-most probable $k$-mer from each sequence to generate a revised motif set. Recomputes consensus scores ($Score = \sum (t - \max_{nuc} \text{count})$) and repeats until convergence at a local optimum.
+- Multi-Start Randomization: Repeats the entire hill-climbing process across multiple independent random restarts (e.g., $N = 400$) to escape suboptimal local minima and retain the globally minimal motif score across trials.
+- Complexity:
+  - Time Complexity: $O\left(N \cdot I \cdot t \cdot (\vert{}seq\vert{} - k + 1) \cdot k\right)$, where $N$ is the number of random restarts, $I$ is the average number of iterations to local convergence, $t$ is the number of sequences, and $\vert{}seq\vert{}$ is sequence length.
+  - Space Complexity: $O(t \cdot k + 4 \cdot k)$ to store candidate motifs and the profile frequency matrix.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
