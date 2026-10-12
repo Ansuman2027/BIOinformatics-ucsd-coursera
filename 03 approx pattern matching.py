@@ -13,3 +13,17 @@ def approximate_pattern_matching(pattern: str, text: str, d: int) -> list[int]:
         if mismatches <= d:
             positions.append(i)
     return positions
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    query_pattern = "ATTCTGGA"
+    genome_text = "CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACCCACGGGGTCTGCCAACCTCACCC"
+    max_mismatches = 3
+    result = approximate_pattern_matching(query_pattern, genome_text, max_mismatches)
+    print(f"Starting positions with at most {max_mismatches} mismatches: {result}")
