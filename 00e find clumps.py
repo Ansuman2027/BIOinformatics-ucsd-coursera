@@ -24,3 +24,21 @@ def find_clumps(genome: str, k: int, l: int, t: int) -> list[str]:
             clump_patterns.add(incoming)
 
     return list(clump_patterns)
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    sample_genome = "CGGACTCGACAGATGTGAAGAAATGTGAAGACTGAGTGAAGAGAAGAGGAAACACGACACGACATTGCGACATAATATC"
+    k_val = 5
+    window_L = 50
+    min_count_t = 4
+    clumps = find_clumps(sample_genome, k_val, window_L, min_count_t)
+    print(f"Found clumps: {clumps}")
