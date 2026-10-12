@@ -36,3 +36,20 @@ def frequent_words_with_mismatches(text: str, k: int, d: int) -> list[str]:
         
     max_count = max(counts.values())
     return [kmer for kmer, count in counts.items() if count == max_count]
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    sample_text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
+    k_length = 4
+    max_d = 1
+    frequent_kmers = frequent_words_with_mismatches(sample_text, k_length, max_d)
+    print(f"Most frequent {k_length}-mers with up to {max_d} mismatches: {frequent_kmers}")
