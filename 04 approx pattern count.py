@@ -13,3 +13,19 @@ def approximate_pattern_count(text: str, pattern: str, d: int) -> int:
         if mismatches <= d:
             count += 1
     return count
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    genome_text = "TTTAGAGCCTTCAGAGG"
+    query_pattern = "GAGG"
+    max_mismatches = 2
+    total_count = approximate_pattern_count(genome_text, query_pattern, max_mismatches)
+    print(f"Occurrences of '{query_pattern}' with up to {max_mismatches} mismatches: {total_count}")
