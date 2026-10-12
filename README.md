@@ -1,4 +1,4 @@
-Biological Context: In bacterial genomes, DNA replication starts at the origin of replication (oriC). Due to differences in mutation rates between the leading and lagging strands, Guanine (G) tends to be depleted relative to Cytosine (C) on the reverse half of the replication loop. The point where the cumulative difference between G and C (#G−#C) transitions from decreasing to increasing—the minimum skew—typically identifies the location of oriC.
+01)Biological Context: In bacterial genomes, DNA replication starts at the origin of replication (oriC). Due to differences in mutation rates between the leading and lagging strands, Guanine (G) tends to be depleted relative to Cytosine (C) on the reverse half of the replication loop. The point where the cumulative difference between G and C (#G−#C) transitions from decreasing to increasing—the minimum skew—typically identifies the location of oriC.
 
 Algorithm Mechanism:
 
@@ -13,7 +13,7 @@ It dynamically tracks the lowest skew value seen so far and collects all 1-based
 
 
 
-This function calculates the Hamming distance between two equal-length DNA strings, which represents the total number of mismatched nucleotide positions between them.
+02)This function calculates the Hamming distance between two equal-length DNA strings, which represents the total number of mismatched nucleotide positions between them.
 
 Biological Context: In molecular biology and motif finding, DNA sequences such as transcription factor binding sites (regulatory motifs) rarely remain 100% identical across a genome due to point mutations (substitutions). The Hamming distance serves as a fundamental metric for quantifying genetic divergence, identifying approximate pattern matches, and finding consensus sequences with allowed mismatches.
 
@@ -31,7 +31,7 @@ sum(...) aggregates all mismatches to yield the total distance
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-This function identifies all starting positions where a target k-mer pattern appears as a substring within a larger genomic text with at most d mismatches (Hamming distance ≤d).
+03)This function identifies all starting positions where a target k-mer pattern appears as a substring within a larger genomic text with at most d mismatches (Hamming distance ≤d).
 
 Biological Context: In nature, regulatory regions such as DnaA boxes or transcription factor binding sites are rarely conserved perfectly. Over evolutionary time, mutations occur, meaning a regulatory protein can still recognize and bind to sequences that vary by a few nucleotides. Approximate pattern matching allows computational biologists to locate degenerated or mutated motifs across an entire genome rather than missing them with exact string matching.
 
@@ -50,7 +50,7 @@ It runs in O((∣text∣−k+1)⋅k) time complexity.
 
 
 
-This function computes the total frequency with which a target k-mer pattern occurs within a larger genomic text with up to d allowed mismatches (Hamming distance ≤d).
+04)This function computes the total frequency with which a target k-mer pattern occurs within a larger genomic text with up to d allowed mismatches (Hamming distance ≤d).
 
 Biological Context: In computational genomics, determining the density of degenerate motifs is critical for identifying biological signals like replication origins (oriC) and regulatory promoters. Functional binding sites (such as DnaA boxes) frequently cluster together in high densities with slight point mutations; counting occurrences with tolerance for mismatches quantifies how strongly a specific motif family is enriched in a genomic region.
 
@@ -70,7 +70,7 @@ It operates in O((∣text∣−k+1)⋅k) time complexity and uses O(k) auxiliary
 
 
 
-This pipeline discovers the most overrepresented k-mers (motifs) within a genomic sequence text, allowing each occurrence to vary by up to d mismatches.
+05)This pipeline discovers the most overrepresented k-mers (motifs) within a genomic sequence text, allowing each occurrence to vary by up to d mismatches.
 
 Biological Context: Key regulatory signals—such as the DnaA boxes that trigger bacterial replication initiation—are rarely identical repeats. Instead, a master consensus motif operates across a family of degenerate variants scattered through the origin of replication. Finding the most frequent k-mers with mismatches pinpoints these biological consensus motifs even when the exact canonical sequence appears only rarely or not at all in the raw genome.
 
@@ -87,7 +87,7 @@ Peak Selection: Evaluates the highest count (max(counts.values())) and extracts 
 
 
 
-This algorithm discovers the most abundant k-mer patterns in a genomic sequence by tallying occurrences that allow up to d mismatches and simultaneously accounting for both the forward and reverse complementary strands.
+06)This algorithm discovers the most abundant k-mer patterns in a genomic sequence by tallying occurrences that allow up to d mismatches and simultaneously accounting for both the forward and reverse complementary strands.
 
 Biological Context: DNA is double-stranded, and replication or transcription factors (such as the DnaA initiator protein) bind double-stranded DNA. Because these proteins can recognize binding motifs regardless of which strand carries the canonical sequence (5' to 3' on the forward strand or 5' to 3' on the reverse-complement strand), counting matches on both strands combined is the gold standard approach for identifying true functional motifs like DnaA boxes in bacterial replication origins (oriC).
 
@@ -107,7 +107,7 @@ Peak Selection: Finds the maximum frequency value stored in the defaultdict and 
 
 
 
-This algorithm generates the complete set of all k-mers whose Hamming distance from a target sequence s does not exceed a specified threshold d.
+07)This algorithm generates the complete set of all k-mers whose Hamming distance from a target sequence s does not exceed a specified threshold d.
 
 Biological Context: In motif finding, biological regulatory sites (such as DnaA boxes or transcription factor binding targets) are not strictly conserved and tolerate point substitutions. Rather than testing every theoretical sequence across the genome, generating the d-neighborhood constructs the exact space of all biologically acceptable mutational variants around an observed sequence motif.
 
@@ -134,7 +134,7 @@ Deduplication: Uses a set() during construction to ensure each variant is unique
 
 
 
-This algorithm finds all (k,d)-motifs shared across a collection of DNA sequences—identifying every k-mer that appears in every sequence in dna with at most d mismatches.
+08)This algorithm finds all (k,d)-motifs shared across a collection of DNA sequences—identifying every k-mer that appears in every sequence in dna with at most d mismatches.
 
 Biological Context: Regulatory sequences like transcription factor binding sites (TFBS) control gene expression across clusters of co-regulated genes. Because these binding sites are planted across upstream promoter regions of different genes, they are conserved yet degenerate (subject to point mutations). Motif enumeration solves the challenge of discovering these shared regulatory patterns across a set of related genomic sequences without prior knowledge of what the consensus motif looks like.
 
@@ -151,7 +151,7 @@ Pruning & Filtering: Using Python's all(), candidates that fail to appear in eve
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-This algorithm computes the minimum number of coins needed to make a specific amount of money given a set of coin denominations.
+09)This algorithm computes the minimum number of coins needed to make a specific amount of money given a set of coin denominations.
 
 Context & Motivation: A standard greedy approach (always picking the largest available coin) fails for arbitrary coin systems (e.g., making change for 40 with coins {25,20,10,5,1} gives 25+10+5 [3 coins] via greedy, but 20+20 [2 coins] is optimal). In bioinformatics, this problem serves as the introductory conceptual gateway to dynamic programming before tackling sequence alignment, string edit distances, and the Manhattan Tourist Problem.
 
@@ -537,5 +537,23 @@ Algorithm Mechanism:
 - Complexity:
   - Time Complexity: $O\left(N \cdot I \cdot t \cdot (\vert{}seq\vert{} - k + 1) \cdot k\right)$, where $N$ is the number of random restarts, $I$ is the average number of iterations to local convergence, $t$ is the number of sequences, and $\vert{}seq\vert{}$ is sequence length.
   - Space Complexity: $O(t \cdot k + 4 \cdot k)$ to store candidate motifs and the profile frequency matrix.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+24 gibbs sampling utility
+
+This algorithm implements a Markov Chain Monte Carlo (MCMC) Gibbs sampling strategy to discover regulatory motifs across a collection of DNA sequences by iteratively discarding and re-sampling candidate $k$-mers according to a profile probability distribution.
+
+Biological Context:
+While randomized motif search discards and recalculates all $t$ motifs simultaneously at each step—often oscillating or converging prematurely into local minima—biological regulatory motifs are shared across diverse background sequences with subtle conservation. Gibbs Sampling provides a more cautious, fine-grained exploration of the search space. By isolating and updating one sequence at a time while preserving the consensus information of the remaining $t - 1$ sequences, the sampler acts as a Markov chain that wanders through motif configurations, allowing low-probability moves that escape local optima to locate subtle transcription factor binding sites.
+
+Algorithm Mechanism:
+- Random Initialization: Initializes a set of $t$ candidate $k$-mers by selecting random starting positions across each sequence in `dna`.
+- Leave-One-Out Profile Construction: In each step of `single_gibbs_sampler`, randomly selects a single sequence index $i \in \{0, \dots, t-1\}$ and removes its current motif from the count matrix. Computes a $(t - 1)$ sequence profile matrix incorporating Laplace pseudocounts ($+1$ to counts, normalized by $(t - 1) + 4$).
+- Profile-Randomized Selection: Evaluates all overlapping $k$-mers in sequence $i$ under the profile, normalizes their probabilities into a categorical distribution, and samples a replacement motif using weighted random selection (`random.choices`).
+- Incremental Matrix Updates: Efficiently updates count columns in $O(k)$ time by decrementing counts of the old motif and incrementing counts of the newly sampled motif rather than recomputing the full table.
+- Multi-Start Iteration: Wraps individual sampling trajectories across multiple independent random restarts (`num_starts`) to explore distinct areas of the search space and report the overall minimum score motifs.
+- Complexity:
+  - Time Complexity: $O\left(R \cdot N \cdot (\vert{}seq\vert{} - k + 1) \cdot k\right)$, where $R$ is the number of random starts, $N$ is the number of Gibbs sampling steps per run, and $\vert{}seq\vert{}$ is sequence length.
+  - Space Complexity: $O(t \cdot k + 4 \cdot k)$ to maintain candidate motif sequences, profile probabilities, and count tables.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
