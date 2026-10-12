@@ -22,3 +22,22 @@ def minimum_skew(genome: str) -> list[int]:
             min_positions.append(i)
             
     return min_positions
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    sample_genome = "TAAAGACTGCCGAGAGGCCAACACGAGTGCTAGAACGAGGGGCGTAAACGCGGGTCCGAT"
+    min_indices = minimum_skew(sample_genome)
+    print(f"Positions where skew achieves minimum: {min_indices}")
+
+
+
