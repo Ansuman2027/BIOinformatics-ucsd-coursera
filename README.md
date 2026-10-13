@@ -1,8 +1,8 @@
-# University of California San Diego Bioinformatics Algorithms
+# University of California San Diego Bioinformatics Algorithms (Coursera)
 
-# Bioinformatics Algorithms (UCSD / Coursera)
+ 
 
-A collection of Python implementations solving foundational problems in computational molecular biology. These scripts mirror the core algorithmic challenges covered in the UC San Diego / Coursera *Bioinformatics Specialization*, focusing on replication origin discovery, motif finding, pattern matching, and dynamic programming.
+A collection of Python implementations solving foundational problems in computational molecular biology. These scripts mirror the core algorithmic challenges covered in the UC San Diego , Coursera *Bioinformatics Specialization*, focusing on replication origin discovery, motif finding, pattern matching, and dynamic programming.
 
 ---
 
@@ -49,11 +49,9 @@ Transcription factors regulate batteries of genes by binding conserved promoter 
 ### 4. Dynamic Programming Foundations
 Sequence alignment methods rely on breaking problems into overlapping subproblems rather than relying on myopic greedy choices.
 
-* `09The Change Problem.py` & `22 change problem utility.py`: Solves the classic coin change problem using bottom-up tabulation:
+- `09The Change Problem.py` & `22 change problem utility.py`: Solves the classic coin change problem using bottom-up tabulation:
 
-  $$\text{min\_coins}[m] = \min_{c \in \text{coins}} (\text{min\_coins}[m - c] + 1)$$
+```text
+min_coins[m] = min(min_coins[m - coin] + 1) for coin in coins
 
-  This demonstrates the core dynamic programming principle applied later in pairwise alignments (Needleman-Wunsch / Smith-Waterman).
-
----
 
