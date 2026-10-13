@@ -48,7 +48,7 @@ Transcription factors regulate batteries of genes by binding conserved promoter 
 
 ### 4. Dynamic Programming Foundations
 Sequence alignment methods rely on breaking problems into overlapping subproblems rather than relying on myopic greedy choices.
-
+----+++
 - `09The Change Problem.py` & `22 change problem utility.py`: Solves the classic coin change problem using bottom-up tabulation:
 
 ```text
