@@ -1,0 +1,39 @@
+# Name shown in the "Actions" tab of your GitHub repository
+name: Python Syntax Check
+
+# TRIGGER: run this pipeline every time code is pushed to any branch
+on:
+  push:
+
+# JOBS: a pipeline is made of one or more jobs. Each job runs on a fresh virtual machine.
+jobs:
+  lint:
+    name: Check Python scripts with flake8
+    runs-on: ubuntu-latest   # the type of machine GitHub gives you
+
+    # STEPS: run one after another. If any step fails, the pipeline fails (red cross).
+    steps:
+      # Step 1: download your repository's code onto the machine
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: install Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Step 3: install flake8 (the tool that checks the code)
+      - name: Install flake8
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      # Step 4: look ONLY for serious problems: syntax errors and undefined names.
+      # E9  = syntax/runtime errors
+      # F63 = invalid comparisons
+      # F7  = syntax errors in statements
+      # F82 = undefined names
+      # If any are found, this step fails and the pipeline turns red.
+      - name: Check for syntax errors
+        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
