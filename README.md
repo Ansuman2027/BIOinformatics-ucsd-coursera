@@ -1,5 +1,6 @@
 # University of California San Diego Bioinformatics Algorithms (Coursera)
 
+Finding hidden messages in DNA (Bioinformatics 1)
  
 
 A collection of Python implementations solving foundational problems in computational molecular biology. These scripts mirror the core algorithmic challenges covered in the UC San Diego , Coursera *Bioinformatics Specialization*, focusing on replication origin discovery, motif finding, pattern matching, and dynamic programming.
