@@ -49,3 +49,28 @@ def motif_enumeration(dna: list[str], k: int, d: int) -> list[str]:
             valid_motifs.append(candidate)
             
     return valid_motifs
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input data: a list of DNA sequences, motif length (k), and allowed mismatches (d)
+    dna = [
+        "ATTTGGC",
+        "TGCCTTA",
+        "CGGTATC",
+        "GAAAATT"
+    ]
+    k = 3
+    d = 1
+
+    # Call the motif enumeration function
+    result = motif_enumeration(dna, k, d)
+
+    # Print the resulting motifs separated by spaces
+    print(" ".join(result))
