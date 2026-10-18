@@ -34,3 +34,28 @@ def median_string(dna: list[str], k: int) -> str:
             median = pattern
             
     return median
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input: a list of DNA strings and the desired motif length k
+    dna = [
+        "AAATTGACGCAT",
+        "GACGACCACGTT",
+        "TTCACCACCGTC",
+        "GATACCACGCAT",
+        "GCGTCACCACCG",
+        "TCACGCGCTTG"
+    ]
+    k = 3
+
+    # Call the median_string function to find the k-mer that minimizes total distance
+    result = median_string(dna, k)
+
+    # Print the resulting median string
+    print(result)
+
