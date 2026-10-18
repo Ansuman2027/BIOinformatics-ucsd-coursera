@@ -27,3 +27,23 @@ Neighbors = neighbors
 
 
 
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input: a pattern string and the maximum allowed Hamming distance d
+    pattern = "ACG"
+    d = 1
+
+    # Call the neighbors function to generate the d-neighborhood
+    result = neighbors(pattern, d)
+
+    # Print the resulting neighboring strings separated by newlines (or spaces)
+    print("\n".join(result))
+
+
+
