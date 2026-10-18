@@ -18,3 +18,28 @@ def profile_most_probable_kmer(text: str, k: int, profile: dict[str, list[float]
             most_probable_kmer = kmer
 
     return most_probable_kmer
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input data: a DNA text string, motif length k, and a profile probability matrix
+    text = "ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATCTAGCDCGAT"
+    k = 3
+    profile = {
+        "A": [0.2, 0.4, 0.3],
+        "C": [0.3, 0.1, 0.2],
+        "G": [0.1, 0.3, 0.2],
+        "T": [0.4, 0.2, 0.3]
+    }
+
+    # Call the function to find the most probable k-mer based on the profile matrix
+    result = profile_most_probable_kmer(text, k, profile)
+
+    # Print the resulting most probable k-mer
+    print(result)
