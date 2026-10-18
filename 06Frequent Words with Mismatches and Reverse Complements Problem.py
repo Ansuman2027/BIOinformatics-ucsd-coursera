@@ -41,3 +41,30 @@ def frequent_words_mismatches_reverse_complements(text: str, k: int, d: int) -> 
         
     max_count = max(counts.values())
     return [kmer for kmer, count in counts.items() if count == max_count]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input data: a DNA text, a pattern length (k), and allowed mismatches (d)
+    text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
+    k = 4
+    d = 1
+    
+    # Call the function to find the most frequent k-mers with mismatches and reverse complements
+    result = frequent_words_mismatches_reverse_complements(text, k, d)
+    
+    # Print the resulting patterns
+    print(" ".join(result))
