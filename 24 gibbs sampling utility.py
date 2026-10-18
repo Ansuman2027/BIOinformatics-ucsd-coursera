@@ -76,3 +76,33 @@ def gibbs_sampler(dna: list[str], k: int, t: int, n: int) -> list[str]:
             best_motifs = motifs
             
     return best_motifs
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input data: list of DNA sequences, motif length (k), number of sequences (t), and iterations (N)
+    dna = [
+        "CGCCCCTCTCGGGGGTGTTCAGTAAACGGCCA",
+        "GGGCGAGGTATGTGTAAGTGCCAAGGTGCCAG",
+        "TAGTACCGAGACCGAAAGAAGTATACAGGCGT",
+        "TAGATCAAGTTTCAGGTGCACGTCGGTGAACC",
+        "AATCCACCAGCTCCACGTGCAATGTTGGCCTA"
+    ]
+    k = 8
+    t = len(dna)
+    n = 100
+
+    # Call the gibbs_sampler function to find the best motifs
+    result = gibbs_sampler(dna, k, t, n)
+
+    # Print each discovered motif on a new line
+    print("\n".join(result))
