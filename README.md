@@ -1,58 +1,54 @@
 # University of California San Diego Bioinformatics Algorithms (Coursera)
 
-Finding hidden messages in DNA (Bioinformatics 1)
- 
+### Finding Hidden Messages in DNA (Bioinformatics I)
 
-A collection of Python implementations solving foundational problems in computational molecular biology. These scripts mirror the core algorithmic challenges covered in the UC San Diego , Coursera *Bioinformatics Specialization*, focusing on replication origin discovery, motif finding, pattern matching, and dynamic programming.
-
----
-
-## Overview & Thematic Breakdown
-
-### 1. Origin of Replication & Skew Analysis
-Bacterial genomes initiate replication at a specific locus called $oriC$. Because DNA replication is asymmetric (leading vs. lagging strands), mutational pressures cause distinct nucleotide depletions—most notably, Guanine (G) tends to mutate into other bases on the lagging strand template.
-
-* `01minimum skew.py`: Tracks the cumulative skew metric (#G - #C) across a linear scan of the genome. The point where the skew transitions from decreasing to increasing marks the minimum skew, providing an accurate estimate for the location of $oriC$.
+This repository contains my Python solutions to the algorithmic challenges from the UC San Diego Coursera Bioinformatics Specialization. I wrote these scripts to understand how we can decode biological data programmatically—covering everything from finding where DNA replication starts to building motif finders and dynamic programming algorithms.
 
 ---
 
-### 2. Exact & Approximate String Matching
-Regulatory sequences like DnaA boxes rarely stay 100% identical over evolutionary timescales; proteins recognize short binding sites even when a few point mutations (substitutions) occur.
+## 1. Origin of Replication & Skew Analysis
 
-* `00 pattern count.py`: A sliding-window counter that finds how often a specific k-mer occurs in a string, ensuring overlapping instances (like `GCG` inside `GCGCG`) are properly counted.
-* `00b frequent words.py`: Uses a hash map to find the most frequent k-mers in a sequence. High-frequency words inside putative origin regions often correspond to functional binding sites.
-* `00c reverse complement.py`: Generates the antiparallel reverse complement of a DNA string according to standard Watson-Crick pairing rules (A \leftrightarrow T, C \leftrightarrow G$).
-* `00d pattern matching.py`: A linear scan identifying all 0-based start coordinates of an exact target sequence across an entire genome.
-* `00e find clumps.py`: Implements an efficient sliding window across a genome of length L to locate (L, t)-clumps—k-mers appearing at least t times within that local window.
-* `02 hamming distance.py` & `17 hamming distance utility.py`: Compares two equal-length strings character-by-character using `zip()` to count mismatched positions.
-* `03 approx pattern matching.py` & `18 approx pattern matching utility.py`: Locates all positions where a k-mer appears with at most d mismatches (Hamming distance \le d).
-* `04 approx pattern count.py` & `19 approx pattern count utility.py`: Tally of how many times a pattern appears allowing up to $d$ mismatches.
-* `07Generate the $d$-Neighborhood of a String .py` & `16 generating neighborhood.py`: Recursively constructs the complete mutational search space (the d-neighborhood)—all distinct k-mers within Hamming distance d of a seed sequence.
-* `05frequent words with mismatches.py` & `20 frequent words with mismatches utility.py`: Combines sliding windows and neighborhood generation to identify the most abundant degenerate k-mers in a sequence.
-* `06Frequent Words with Mismatches and Reverse Complements Problem.py` & `21 frequent words mismatches reverse complements utility.py`: Identifies consensus motifs by counting approximate matches simultaneously on both the forward and reverse-complement strands, accurately modeling double-stranded DNA protein binding.
+Before a cell divides, it has to replicate its entire DNA. In circular bacterial genomes, this process kicks off at a specific spot called oriC. Because DNA replication happens asymmetrically on the leading and lagging strands, bases mutate differently over time—specifically, Guanine tends to drop off on the lagging strand template.
+
+* **01minimum skew.py**: This script tracks the cumulative skew score (G minus C count) step by step across the whole genome. The exact spot where the skew graph hits its lowest point and starts climbing back up gives us a reliable way to pinpoint where oriC is hiding.
 
 ---
 
-### 3. Regulatory Motif Discovery
-Transcription factors regulate batteries of genes by binding conserved promoter regions upstream of transcription start sites. These scripts explore multiple algorithmic strategies to isolate shared signals hidden across multiple DNA sequences.
+## 2. Exact & Approximate String Matching
 
-* `08Motif Enumeration Problem.py` & `10 motif enumeration.py`: A brute-force exhaustive search that identifies all (k, d)-motifs present in every sequence of a dataset with at most d substitutions.
-* `11 median string.py`: Searches all 4^k possible nucleotide permutations to locate the consensus sequence that minimizes total Hamming distance across a set of promoter sequences.
-* `12 profile most probable kmer.py`: Evaluates a nucleotide profile probability matrix (Position Weight Matrix) to identify the k-mer with the highest joint probability in a sequence.
-* `13 greedy motif search.py`: Uses an iterative greedy strategy: sets a seed motif in the first sequence, constructs an evolving profile, and picks the best matching motif in each subsequent sequence.
-* `14 greedy motif search with pseudocounts.py`: Refines greedy search by incorporating Laplace’s Rule of Succession (pseudocounts). Adding +1 to all nucleotide observation counts prevents unseen bases from dropping whole profile probabilities to zero.
-* `15 distance between pattern and strings.py`: Computes the cumulative distance metric d(\text{Pattern}, \text{DNA}) by summing the closest match distances across all sequences in a collection.
-* `23 randomized motif search utility.py` : A Monte Carlo Expectation-Maximization approach. It starts with random motif candidates, builds profile matrices with pseudocounts, and iteratively refines choices until local convergence, utilizing multiple restarts to find optimal global consensus scores.
-* `24 gibbs sampling utility.py`: A Markov Chain Monte Carlo (MCMC) heuristic that updates one sequence at a time. By leaving one sequence out, computing a profile on the remaining $t-1$ motifs, and stochastically sampling a replacement motif, it effectively navigates around local minima.
+Proteins like DnaA and various transcription factors need to attach to specific short stretches of DNA (like DnaA boxes) to kick off biological processes. But evolution isn't neat—these binding sites aren't 100% identical everywhere, so we need tools that can search for exact matches as well as patterns with a few mutations.
+
+* **00 pattern count.py**: A straightforward sliding-window counter that checks how many times a target k-mer pops up in a sequence, making sure it handles overlapping matches correctly.
+* **00b frequent words.py**: Uses a dictionary/hash map to scan through windows and figure out which k-mers show up most often, which usually points us straight toward functional regulatory zones.
+* **00c reverse complement.py**: Takes a DNA string and flips it into its antiparallel reverse complement following standard Watson-Crick pairing rules (A to T, C to G).
+* **00d pattern matching.py**: Scans through an entire genome linearly to grab all the 0-based starting indexes where an exact target pattern appears.
+* **00e find clumps.py**: Slides across a genome of length L to spot clumps—meaning k-mers that cluster together by appearing at least a set number of times inside that localized window.
+* **02 hamming distance.py & 17 hamming distance utility.py**: Compares two strings of the exact same length side-by-side using code to count up how many mismatched letters there are.
+* **03 approx pattern matching.py & 18 approx pattern matching utility.py**: Scans a genome to find all positions where a pattern matches with up to a specified number of mismatches allowed.
+* **04 approx pattern count.py & 19 approx pattern count utility.py**: Counts the total frequency of a pattern across a sequence while factoring in substitutions.
+* **07Generate the d-Neighborhood of a String.py & 16 generating neighborhood.py**: Recursively builds out the full mutational neighborhood—every single valid k-mer that sits within a Hamming distance from a starting seed.
+* **05frequent words with mismatches.py & 20 frequent words with mismatches utility.py**: Combines sliding windows with neighborhood generation to find the most common degenerate k-mers even when mutations are present.
+* **06Frequent Words with Mismatches and Reverse Complements Problem.py & 21 frequent words mismatches reverse complements utility.py**: Searches for consensus motifs by tallying approximate matches across both the forward strand and its reverse complement at the same time, mimicking how double-stranded DNA actually works in nature.
 
 ---
 
-### 4. Dynamic Programming Foundations
-Sequence alignment methods rely on breaking problems into overlapping subproblems rather than relying on myopic greedy choices.
-----+++
-- `09The Change Problem.py` & `22 change problem utility.py`: Solves the classic coin change problem using bottom-up tabulation:
+## 3. Regulatory Motif Discovery
 
-```text
-min_coins[m] = min(min_coins[m - coin] + 1) for coin in coins
+When cells respond to stress or environmental cues, they turn on whole groups of genes at once by binding transcription factors to shared promoter regions upstream. Because these sequence motifs are short and noisy, these scripts explore different ways to hunt them down.
 
+* **08Motif Enumeration Problem.py & 10 motif enumeration.py**: An exhaustive brute-force script that checks every possible motif variant to see which ones appear across all input sequences with at most a set number of mismatches.
+* **11 median string.py**: Tests all possible nucleotide combinations to find the single consensus sequence that keeps the total Hamming distance across all promoter sequences as low as possible.
+* **12 profile most probable kmer.py**: Takes a Position Weight Matrix probability profile and scans a DNA string to pull out the k-mer with the highest joint probability score.
+* **13 greedy motif search.py**: A greedy approach that starts by picking candidate k-mers from the first sequence, builds an evolving profile matrix, and picks the best matching choices in every subsequent sequence.
+* **14 greedy motif search with pseudocounts.py**: Upgrades the greedy search by adding pseudocounts (Laplace's Rule of Succession). This ensures that if a nucleotide hasn't been seen yet, its probability doesn't drop to zero and break the math.
+* **15 distance between pattern and strings.py**: Computes the cumulative distance metric by summing up the shortest Hamming distances between a pattern and every individual sequence in a dataset.
+* **23 randomized motif search utility.py**: A Monte Carlo Expectation-Maximization approach. It kicks off with random starting motifs, builds probability profiles with pseudocounts, and iteratively refines them until it converges, running multiple random restarts to escape local traps.
+* **24 gibbs sampling utility.py**: A Markov Chain Monte Carlo sampling heuristic. Instead of updating everything at once, it leaves one sequence out, builds a profile from the rest, and stochastically samples a new motif to gradually zero in on the best alignment.
 
+---
+
+## 4. Dynamic Programming Foundations
+
+Instead of getting bogged down by slow, myopic choices, sequence alignment problems rely on breaking big challenges down into overlapping subproblems.
+
+* **09The Change Problem.py & 22 change problem utility.py**: Solves the classic coin change problem using bottom-up tabulation to find the minimum coins needed for any given amount. This serves as the foundational logic for building up to biological sequence alignment algorithms like Needleman-Wunsch and Smith-Waterman.
