@@ -68,3 +68,30 @@ def greedy_motif_search_pseudocounts(dna: list[str], k: int, t: int) -> list[str
             best_motifs = motifs
             
     return best_motifs
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    k = 3
+    t = 5
+    dna_list = [
+        "GGCGTTCAGGCA",
+        "AAGAATCAGTCA",
+        "CAAGGAGTTCGC",
+        "CACGTCAATCAC",
+        "CAATAATATTCG",
+    ]
+
+    motifs = greedy_motif_search_pseudocounts(dna_list, k, t)
+    print("Found Motifs:")
+    for motif in motifs:
+        print(motif)
+    print(f"Total Score: {score_motifs(motifs)}")
+
