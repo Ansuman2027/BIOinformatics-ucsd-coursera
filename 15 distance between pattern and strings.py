@@ -22,3 +22,25 @@ def distance_between_pattern_and_strings(
         total_distance += min_hamming
 
     return total_distance
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    pattern = "AAA"
+    dna_list = [
+        "TTACCTTAAC",
+        "GATATCTGTC",
+        "ACGGCGTTCG",
+        "CCCTAAAGAG",
+        "CGTCAGAGGT",
+    ]
+
+    total_dist = distance_between_pattern_and_strings(pattern, dna_list)
+    print(f"Total distance between pattern and strings: {total_dist}")
