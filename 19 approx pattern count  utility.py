@@ -13,3 +13,12 @@ def approximate_pattern_count(text: str, pattern: str, d: int) -> int:
         if mismatches <= d:
             count += 1
     return count
+
+
+
+
+if __name__ == "__main__":
+    text_str = "AACAAGCTGATAAACATTG"
+    pattern_str = "AATA"
+    d_val = 1
+    print(f"Approximate Pattern Count: {approximate_pattern_count(text_str, pattern_str, d_val)}")
