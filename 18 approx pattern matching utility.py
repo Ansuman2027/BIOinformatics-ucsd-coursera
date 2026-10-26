@@ -13,3 +13,11 @@ def approximate_pattern_matching(pattern: str, text: str, d: int) -> list[int]:
         if mismatches <= d:
             positions.append(i)
     return positions
+
+
+
+if __name__ == "__main__":
+    pattern_str = "ATTCT"
+    text_str = "CGGTCGATTCG"
+    d_val = 1
+    print(f"Approximate Pattern Matching Positions: {approximate_pattern_matching(pattern_str, text_str, d_val)}")
