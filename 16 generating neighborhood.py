@@ -27,3 +27,14 @@ Neighbors = neighbors
 
 
 
+
+
+
+if __name__ == "__main__":
+    pattern = "ACG"
+    d_value = 1
+    result = neighbors(pattern, d_value)
+    print(f"Neighbors of {pattern} with Hamming distance {d_value}:")
+    for neighbor in sorted(result):
+        print(neighbor)
+
