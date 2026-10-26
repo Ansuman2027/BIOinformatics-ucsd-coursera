@@ -6,3 +6,10 @@ import sys
 def hamming_distance(p: str, q: str) -> int:
     """Calculate the Hamming distance between two strings."""
     return sum(c1 != c2 for c1, c2 in zip(p, q))
+
+
+
+if __name__ == "__main__":
+    p_str = "GGGCCGTTGGT"
+    q_str = "GGGCCGTTGGA"
+    print(f"Hamming Distance: {hamming_distance(p_str, q_str)}")
