@@ -2,7 +2,7 @@
 
 ### Finding Hidden Messages in DNA (Bioinformatics I)
 
-This repository contains my Python solutions to the algorithmic challenges from the UC San Diego Coursera Bioinformatics Specialization. I wrote these scripts to understand how we can decode biological data programmatically—covering everything from finding where DNA replication starts to building motif finders and dynamic programming algorithms.
+This repository contains my Python solutions to the algorithmic challenges from the UC San Diego Coursera Bioinformatics Specialization and Cogniterra platform. I wrote these scripts to understand how we can decode biological data programmatically—covering everything from finding where DNA replication starts to building motif finders and dynamic programming algorithms.
 
 ---
 
