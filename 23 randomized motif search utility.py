@@ -60,3 +60,25 @@ def randomized_motif_search(dna: list[str], k: int, t: int) -> list[str]:
             best_motifs = motifs
             
     return best_motifs
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input: a list of DNA sequences, k-mer length k, and number of sequences t
+    k = 8
+    t = 5
+    dna = [
+        "CGCCCCTCTCGGAGGTGTTCAGAGTGAWCC",
+        "AAGAAGCAGGAACATAGCAGGCGTAACA",
+        "CCAGCAGCGGACAGTAGCAGTCAGAGAA",
+        "ACACCAGCATGATAGTACAGACGTATTG",
+        "CCAGCAGACAGTAGCAGCAGTAGGACGA"
+    ]
+    
+    # Call the randomized motif search function and print the result
+    result = randomized_motif_search(dna, k, t)
+    print("Found motifs:")
+    for motif in result:
+        print(motif)
