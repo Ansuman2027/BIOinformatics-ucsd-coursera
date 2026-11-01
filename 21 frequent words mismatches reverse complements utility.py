@@ -41,3 +41,20 @@ def frequent_words_mismatches_reverse_complements(text: str, k: int, d: int) -> 
         
     max_count = max(counts.values())
     return [kmer for kmer, count in counts.items() if count == max_count]
+
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input: a text string, k-mer length k, and allowed mismatches d
+    text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
+    k = 4
+    d = 1
+    
+    # Call the frequent words with mismatches and reverse complements function
+    result = frequent_words_mismatches_reverse_complements(text, k, d)
+    
+    # Print the resulting frequent words separated by spaces
+    print(" ".join(result))
