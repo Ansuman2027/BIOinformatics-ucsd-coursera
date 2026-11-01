@@ -17,3 +17,16 @@ def change(money: int, coins: list[int]) -> int:
 
 # Alias in case the grader tests for capitalized Change
 Change = change
+
+
+
+
+
+if __name__ == "__main__":
+    # Example input: money amount and available coin denominations
+    money = 40
+    coins = [1, 5, 10, 20, 25]
+    
+    # Call the change function and print the result
+    result = change(money, coins)
+    print(f"Minimum coins needed for {money}: {result}")
