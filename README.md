@@ -1,4 +1,5 @@
 # University of California San Diego Bioinformatics Algorithms (Coursera)
+<img width="1920" height="975" alt="Screenshot (15)" src="https://github.com/user-attachments/assets/68409768-01a7-41b6-ad0d-78c4e69ea532" />
 
 ### Finding Hidden Messages in DNA (Bioinformatics I)
 
@@ -11,7 +12,7 @@ This repository contains my Python solutions to the algorithmic challenges from 
 
 ## 1. Origin of Replication & Skew Analysis
 
-Before a cell divides, it has to replicate its entire DNA. In circular bacterial genomes, this process kicks off at a specific spot called oriC. Because DNA replication happens asymmetrically on the leading and lagging strands, bases mutate differently over time—specifically, Guanine tends to drop off on the lagging strand template.
+Before a cell divides, it has to replicate its entire DNA. In circular bacterial genomes, this process kicks off at a specific spot called oriC. Because DNA replication happens asymmetrically on the leading and lagging strands, bases mutate differently over time specifically, Guanine tends to drop off on the lagging strand template.
 
 * **01minimum skew.py**: This script tracks the cumulative skew score (G minus C count) step by step across the whole genome. The exact spot where the skew graph hits its lowest point and starts climbing back up gives us a reliable way to pinpoint where oriC is hiding.
 
