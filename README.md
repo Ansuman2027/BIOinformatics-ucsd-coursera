@@ -37,6 +37,7 @@ Proteins like DnaA and various transcription factors need to attach to specific 
 ---
 
 ## 3. Regulatory Motif Discovery
+<img width="865" height="294" alt="GBTRGGGMCNRAMGTCCCCN" src="https://github.com/user-attachments/assets/adcc3f21-f989-4a85-85d7-006bfe3187f1" />
 
 When cells respond to stress or environmental cues, they turn on whole groups of genes at once by binding transcription factors to shared promoter regions upstream. Because these sequence motifs are short and noisy, these scripts explore different ways to hunt them down.
 
